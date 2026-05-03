@@ -14,10 +14,37 @@ const bodyFont = Manrope({
   weight: ["400", "500", "600", "700"],
 });
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  name: "Salon Merci",
+  url: "https://salonmerci.dk",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Søndergade 20",
+    addressLocality: "Odense",
+    postalCode: "5000",
+    addressCountry: "DK",
+  },
+};
+
 export const metadata: Metadata = {
-  title: "Salon Merci | Vi er snart klar",
+  title: "Salon Merci | Frisør i Odense",
   description:
-    "Salon Merci gør en ny hjemmeside klar. Book din tid online via Timma.",
+    "Salon Merci er en frisørsalon på Søndergade 20, 5000 Odense. Book din tid nemt og hurtigt online via Timma.",
+  metadataBase: new URL("https://salonmerci.dk"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Salon Merci | Frisør i Odense",
+    description:
+      "Book din tid hos Salon Merci på Søndergade 20, Odense. Online booking via Timma.",
+    url: "https://salonmerci.dk",
+    siteName: "Salon Merci",
+    locale: "da_DK",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -27,6 +54,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="da">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </head>
       <body className={`${headingFont.variable} ${bodyFont.variable}`}>
         {children}
       </body>
