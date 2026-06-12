@@ -1,8 +1,8 @@
 # Salon Merci
 
-Single-page Next.js under-construction site for a hair salon client.
+Enkeltsidet Next.js hjemmeside under opbygning til en frisørsalon.
 
-## Stack
+## Teknologistak
 
 - Next.js 16
 - TypeScript
@@ -10,30 +10,30 @@ Single-page Next.js under-construction site for a hair salon client.
 - ESLint
 - npm
 
-## Development
+## Udvikling
 
-Install dependencies:
+Installer afhængigheder:
 
 ```bash
 npm install
 ```
 
-Start the dev server:
+Start udviklingsserveren:
 
 ```bash
 npm run dev
 ```
 
-Build for production:
+Byg til produktion:
 
 ```bash
 npm run build
 ```
 
-## Content placeholders
+## Indholdspladsholdere
 
-Update these placeholders before publishing:
+Opdater disse pladsholdere før publicering:
 
-- phone number in the page CTA and contact card
-- email address in the page CTA and contact card
-- salon address in the contact card
+- telefonnummer i sidens CTA og kontaktkort
+- e-mailadresse i sidens CTA og kontaktkort
+- salonens adresse i kontaktkortet

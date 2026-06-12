@@ -21,44 +21,75 @@ const BLACK = "#0A0A0A";
 const CHARCOAL = "#141414";
 const DARK = "#1A1A1A";
 const OFF_WHITE = "#F0EAD6";
+const BOOKING_URL = "https://book.timma.dk/salonmerci";
 
-const NAV_LINKS = ["Services", "About", "Gallery", "Book"];
+const NAV_LINKS = [
+  { id: "services", label: "Ydelser" },
+  { id: "gallery", label: "Galleri" },
+  { id: "book", label: "Booking" },
+];
 
 const SERVICES = [
   {
     icon: "✂",
-    title: "Signature Cut",
-    sub: "Tailored precision cuts crafted for your face & lifestyle.",
-    price: "From 395 kr",
+    title: "Signaturklip",
+    sub: "Skræddersyede præcisionsklip til dit ansigt og din livsstil.",
+    price: "Fra 395 kr",
   },
   {
     icon: "◈",
-    title: "Colour & Balayage",
-    sub: "Hand-painted tones and full-colour transformations.",
-    price: "From 895 kr",
+    title: "Farve & Balayage",
+    sub: "Håndmalede nuancer og fulde farvetransformationer.",
+    price: "Fra 895 kr",
   },
   {
     icon: "⌁",
-    title: "Treatment & Care",
-    sub: "Deep conditioning rituals to restore vitality and shine.",
-    price: "From 295 kr",
+    title: "Kur & Pleje",
+    sub: "Dybt plejende behandlinger, der genskaber vitalitet og glans.",
+    price: "Fra 295 kr",
   },
   {
     icon: "❧",
-    title: "Bridal & Events",
-    sub: "Bespoke styling for your most memorable moments.",
-    price: "From 1.200 kr",
+    title: "Bryllup & Events",
+    sub: "Skræddersyet styling til dine mest mindeværdige øjeblikke.",
+    price: "Fra 1.200 kr",
+  },  {
+    icon: "✂",
+    title: "Signaturklip",
+    sub: "Skræddersyede præcisionsklip til dit ansigt og din livsstil.",
+    price: "Fra 395 kr",
+  },
+  {
+    icon: "◈",
+    title: "Farve & Balayage",
+    sub: "Håndmalede nuancer og fulde farvetransformationer.",
+    price: "Fra 895 kr",
+  },
+  {
+    icon: "⌁",
+    title: "Kur & Pleje",
+    sub: "Dybt plejende behandlinger, der genskaber vitalitet og glans.",
+    price: "Fra 295 kr",
+  },
+  {
+    icon: "❧",
+    title: "Bryllup & Events",
+    sub: "Skræddersyet styling til dine mest mindeværdige øjeblikke.",
+    price: "Fra 1.200 kr",
   },
 ];
 
 const GALLERY_CAPTIONS = [
-  "Lived-in blonde",
-  "Precision bob",
-  "Copper balayage",
-  "Sleek updo",
-  "Natural waves",
-  "Rich brunette",
+  "Naturlig blond",
+  "Præcis bob",
+  "Kobber balayage",
+  "Elegant opsætning",
+  "Naturlige bølger",
+  "Dyb brunette",
 ];
+
+const BANNER_ITEMS = ["Farve & Klip", "Balayage", "Bryllupsstyling", "Hårbehandlinger"];
+const BANNER_LOOP_ITEMS = [...BANNER_ITEMS, ...BANNER_ITEMS, ...BANNER_ITEMS];
 
 function GoldDivider({ style }: { style?: React.CSSProperties }) {
   return (
@@ -157,13 +188,15 @@ export default function SalonMerci() {
     },
     navCta: {
       fontFamily: "'Raleway', sans-serif",
-      fontSize: "11px",
-      letterSpacing: "3px",
+      fontSize: "13px",
+      letterSpacing: "1.5px",
+      fontWeight: 600,
       textTransform: "uppercase",
       background: "transparent",
       border: `1px solid ${GOLD}`,
       color: GOLD,
-      padding: "10px 24px",
+      padding: "14px 30px",
+      lineHeight: 1.1,
       cursor: "pointer",
       transition: "background 0.3s, color 0.3s",
     },
@@ -256,7 +289,7 @@ export default function SalonMerci() {
     },
     introBand: {
       background: GOLD,
-      padding: "18px 48px",
+      padding: "22px 48px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -265,10 +298,13 @@ export default function SalonMerci() {
     },
     introBandText: {
       fontFamily: "'Cinzel', serif",
-      fontSize: "10px",
-      letterSpacing: "6px",
+      fontSize: "14px",
+      fontWeight: 600,
+      letterSpacing: "2px",
+      lineHeight: 1.3,
       textTransform: "uppercase",
-      color: BLACK,
+      color: "#111111",
+      textShadow: "0 0.5px 0 rgba(255,255,255,0.35)",
       whiteSpace: "nowrap",
     },
     section: {
@@ -345,61 +381,6 @@ export default function SalonMerci() {
       color: GOLD,
       letterSpacing: "1px",
     },
-    aboutGrid: {
-      display: "grid",
-      gridTemplateColumns: "1fr 1fr",
-      gap: "80px",
-      alignItems: "center",
-    },
-    aboutVisual: {
-      position: "relative",
-      aspectRatio: "3/4",
-      background: CHARCOAL,
-      border: `1px solid ${GOLD}33`,
-      overflow: "hidden",
-    },
-    aboutVisualInner: {
-      position: "absolute",
-      inset: "16px",
-      border: `1px solid ${GOLD}55`,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    aboutVisualMonogram: {
-      fontFamily: "'Cinzel', serif",
-      fontSize: "80px",
-      color: `${GOLD}40`,
-      letterSpacing: "8px",
-      userSelect: "none",
-    },
-    aboutCorner: (pos: "tl" | "tr" | "bl" | "br") => ({
-      position: "absolute",
-      width: "20px",
-      height: "20px",
-      borderColor: GOLD,
-      borderStyle: "solid",
-      borderWidth:
-        pos === "tl"
-          ? "1px 0 0 1px"
-          : pos === "tr"
-            ? "1px 1px 0 0"
-            : pos === "bl"
-              ? "0 0 1px 1px"
-              : "0 1px 1px 0",
-      top: pos.startsWith("t") ? "8px" : "auto",
-      bottom: pos.startsWith("b") ? "8px" : "auto",
-      left: pos.endsWith("l") ? "8px" : "auto",
-      right: pos.endsWith("r") ? "8px" : "auto",
-    }),
-    aboutBody: {
-      fontFamily: "'Cormorant Garamond', serif",
-      fontSize: "18px",
-      fontWeight: 300,
-      lineHeight: 1.9,
-      color: `${OFF_WHITE}90`,
-      marginBottom: "32px",
-    },
     galleryGrid: {
       display: "grid",
       gridTemplateColumns: "repeat(3, 1fr)",
@@ -460,29 +441,31 @@ export default function SalonMerci() {
     btn: {
       display: "inline-block",
       fontFamily: "'Raleway', sans-serif",
-      fontSize: "11px",
-      letterSpacing: "4px",
+      fontSize: "14px",
+      letterSpacing: "1.2px",
       textTransform: "uppercase",
       background: GOLD,
       color: BLACK,
       border: "none",
-      padding: "16px 40px",
+      padding: "18px 44px",
       cursor: "pointer",
-      fontWeight: 500,
+      fontWeight: 700,
+      lineHeight: 1.1,
       transition: "background 0.3s, transform 0.2s",
     },
     btnOutline: {
       display: "inline-block",
       fontFamily: "'Raleway', sans-serif",
-      fontSize: "11px",
-      letterSpacing: "4px",
+      fontSize: "14px",
+      letterSpacing: "1.2px",
       textTransform: "uppercase",
       background: "transparent",
       color: GOLD,
       border: `1px solid ${GOLD}`,
-      padding: "15px 40px",
+      padding: "17px 44px",
       cursor: "pointer",
-      fontWeight: 400,
+      fontWeight: 600,
+      lineHeight: 1.1,
       transition: "background 0.3s, color 0.3s",
     },
     contactInfo: {
@@ -552,7 +535,6 @@ export default function SalonMerci() {
         }
 
         @media (max-width: 900px) {
-          .about-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
           .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; grid-template-rows: repeat(3, 200px) !important; }
         }
 
@@ -561,6 +543,9 @@ export default function SalonMerci() {
           .main-section { padding: 72px 20px !important; }
           .gallery-grid { grid-template-columns: 1fr !important; grid-template-rows: repeat(6, 180px) !important; }
           .footer-wrap { flex-direction: column; gap: 16px; }
+          .intro-marquee { animation-duration: 34s !important; }
+          .intro-marquee-group { gap: 28px !important; }
+          button, a[style] { font-size: 13px !important; }
         }
       `}</style>
 
@@ -570,10 +555,10 @@ export default function SalonMerci() {
         </div>
         <ul style={styles.navLinks} className="nav-links">
           {NAV_LINKS.map((l) => (
-            <li key={l}>
+            <li key={l.id}>
               <span
                 style={styles.navLink}
-                onClick={() => scrollTo(l.toLowerCase())}
+                onClick={() => scrollTo(l.id)}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.color = GOLD;
                   e.currentTarget.style.opacity = "1";
@@ -583,14 +568,14 @@ export default function SalonMerci() {
                   e.currentTarget.style.opacity = "0.8";
                 }}
               >
-                {l}
+                {l.label}
               </span>
             </li>
           ))}
         </ul>
-        <button
+        <a
+          href={BOOKING_URL}
           style={styles.navCta}
-          onClick={() => scrollTo("book")}
           onMouseEnter={(e) => {
             e.currentTarget.style.background = GOLD;
             e.currentTarget.style.color = BLACK;
@@ -600,15 +585,15 @@ export default function SalonMerci() {
             e.currentTarget.style.color = GOLD;
           }}
         >
-          Book Now
-        </button>
+          Book tid
+        </a>
       </nav>
 
       <section id="hero" style={styles.hero}>
         <div style={styles.heroGrid} />
         <div style={styles.heroBg} />
 
-        <p style={styles.heroEyebrow}>Odense · Since 2010</p>
+        <p style={styles.heroEyebrow}>Odense · Siden 2010</p>
 
         <h1 style={styles.heroTitle}>
           Salon <span style={styles.heroTitleAccent}>Merci</span>
@@ -616,12 +601,12 @@ export default function SalonMerci() {
 
         <GoldDivider style={{ width: "200px", margin: "24px auto" }} />
 
-        <p style={styles.heroSub}>Where precision meets artistry</p>
+        <p style={styles.heroSub}>Skal vi skrive noget her??????</p>
 
         <div style={{ display: "flex", gap: "16px", marginTop: "48px", position: "relative", flexWrap: "wrap", justifyContent: "center" }}>
-          <button
+          <a
+            href={BOOKING_URL}
             style={styles.btn}
-            onClick={() => scrollTo("book")}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = GOLD_LIGHT;
             }}
@@ -629,8 +614,8 @@ export default function SalonMerci() {
               e.currentTarget.style.background = GOLD;
             }}
           >
-            Book Appointment
-          </button>
+            Book tid
+          </a>
           <button
             style={styles.btnOutline}
             onClick={() => scrollTo("services")}
@@ -641,35 +626,43 @@ export default function SalonMerci() {
               e.currentTarget.style.background = "transparent";
             }}
           >
-            Our Services
+            Se ydelser
           </button>
         </div>
 
         <div style={styles.heroScroll} onClick={() => scrollTo("services")}>
-          <span style={styles.heroScrollText}>Scroll</span>
+          <span style={styles.heroScrollText}>Scroll ned</span>
           <div style={styles.heroScrollLine} />
         </div>
       </section>
 
       <div style={styles.introBand}>
         <div
+          className="intro-marquee"
           style={{
             display: "flex",
             gap: "40px",
-            animation: "marquee 18s linear infinite",
+            animation: "marquee 28s linear infinite",
+            width: "max-content",
+            willChange: "transform",
             whiteSpace: "nowrap",
           }}
         >
-          {[...Array(6)].map((_, i) => (
-            <span key={i} style={{ display: "flex", gap: "40px" }}>
-              <span style={styles.introBandText}>Colour &amp; Cut</span>
-              <span style={{ color: `${BLACK}60`, fontSize: "10px" }}>✦</span>
-              <span style={styles.introBandText}>Balayage</span>
-              <span style={{ color: `${BLACK}60`, fontSize: "10px" }}>✦</span>
-              <span style={styles.introBandText}>Bridal Styling</span>
-              <span style={{ color: `${BLACK}60`, fontSize: "10px" }}>✦</span>
-              <span style={styles.introBandText}>Hair Treatments</span>
-              <span style={{ color: `${BLACK}60`, fontSize: "10px" }}>✦</span>
+          {[0, 1].map((groupIndex) => (
+            <span
+              key={groupIndex}
+              className="intro-marquee-group"
+              aria-hidden={groupIndex === 1}
+              style={{ display: "flex", gap: "40px", flexShrink: 0 }}
+            >
+              {BANNER_LOOP_ITEMS.map((item, itemIndex) => (
+                <span key={`${groupIndex}-${item}-${itemIndex}`} style={{ display: "flex", gap: "40px", alignItems: "center" }}>
+                  <span style={styles.introBandText}>{item}</span>
+                  {itemIndex < BANNER_LOOP_ITEMS.length - 1 && (
+                    <span style={{ color: "#2B2100", fontSize: "14px", fontWeight: 700 }}>✦</span>
+                  )}
+                </span>
+              ))}
             </span>
           ))}
         </div>
@@ -677,9 +670,9 @@ export default function SalonMerci() {
 
       <section id="services" style={{ background: BLACK }}>
         <div style={styles.section} className="main-section">
-          <p style={styles.sectionEyebrow}>What We Offer</p>
-          <h2 style={styles.sectionTitle}>Our Services</h2>
-          <GoldDivider style={{ width: "120px" }} />
+          <p style={styles.sectionEyebrow}>Det tilbyder vi</p>
+          <h2 style={styles.sectionTitle}>Klip klip ?</h2>
+     
 
           <div style={styles.serviceGrid}>
             {SERVICES.map((s, i) => (
@@ -705,72 +698,11 @@ export default function SalonMerci() {
         </div>
       </section>
 
-      <section id="about" style={{ background: CHARCOAL }}>
-        <div style={styles.section} className="main-section">
-          <div style={styles.aboutGrid} className="about-grid">
-            <div style={styles.aboutVisual}>
-              <div style={styles.aboutVisualInner}>
-                <span style={styles.aboutVisualMonogram}>SM</span>
-              </div>
-              {(["tl", "tr", "bl", "br"] as const).map((pos) => (
-                <div key={pos} style={styles.aboutCorner(pos)} />
-              ))}
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "0",
-                  left: "0",
-                  right: "0",
-                  height: "3px",
-                  background: `linear-gradient(to right, transparent, ${GOLD}, transparent)`,
-                }}
-              />
-            </div>
-
-            <div>
-              <p style={styles.sectionEyebrow}>Our Story</p>
-              <h2 style={styles.sectionTitle}>
-                The Art of Hair,
-                <br />
-                <em
-                  style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontStyle: "italic",
-                    color: GOLD,
-                  }}
-                >
-                  Elevated
-                </em>
-              </h2>
-              <GoldDivider style={{ width: "100px", margin: "0 0 32px" }} />
-              <p style={styles.aboutBody}>
-                Salon Merci was born from a passion for the transformative power of hair. Located in the heart of Odense, we combine technical mastery with an intimate, personal approach - crafting looks that feel uniquely you.
-              </p>
-              <p style={styles.aboutBody}>
-                Every visit is a ritual. Every cut, a conversation. We believe that true beauty begins when craft meets care.
-              </p>
-              <button
-                style={{ ...styles.btnOutline, marginTop: "8px" }}
-                onClick={() => scrollTo("book")}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = `${GOLD}15`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                }}
-              >
-                Meet the Team
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section id="gallery" style={{ background: BLACK }}>
         <div style={styles.section} className="main-section">
-          <p style={styles.sectionEyebrow}>Portfolio</p>
-          <h2 style={styles.sectionTitle}>The Gallery</h2>
-          <GoldDivider style={{ width: "120px" }} />
+          <p style={styles.sectionEyebrow}>Galleri ????</p>
+          <h2 style={styles.sectionTitle}>Galleri ?????</h2>
+    
 
           <div style={styles.galleryGrid} className="gallery-grid">
             {GALLERY_CAPTIONS.map((cap, i) => (
@@ -782,53 +714,17 @@ export default function SalonMerci() {
             ))}
           </div>
 
-          <p
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontStyle: "italic",
-              fontSize: "15px",
-              color: `${OFF_WHITE}55`,
-              textAlign: "center",
-              marginTop: "20px",
-              letterSpacing: "1px",
-            }}
-          >
-            Follow us on Instagram for the latest looks - <span style={{ color: GOLD }}>@salonmerci</span>
-          </p>
+   
         </div>
       </section>
 
       <section id="book" style={styles.bookingSection}>
         <div style={styles.bookingBg} />
-        <p style={styles.sectionEyebrow}>Ready?</p>
-        <h2 style={{ ...styles.sectionTitle, textAlign: "center", marginBottom: "8px" }}>Book Your Visit</h2>
-        <GoldDivider style={{ width: "160px", margin: "0 auto 32px" }} />
-        <p
-          style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontSize: "20px",
-            fontStyle: "italic",
-            color: `${OFF_WHITE}80`,
-            maxWidth: "480px",
-            margin: "0 auto 40px",
-            lineHeight: 1.7,
-          }}
-        >
-          Your next transformation is one appointment away.
-        </p>
+       <h2 style={{ ...styles.sectionTitle, textAlign: "center", marginBottom: "50px" }}>Ring til os eller</h2>
+    
+    
         <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
-          <a
-            href="tel:66135747"
-            style={styles.btn}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = GOLD_LIGHT;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = GOLD;
-            }}
-          >
-            Call Us
-          </a>
+         
           <a
             href="https://www.salonmerci.dk"
             target="_blank"
@@ -841,16 +737,16 @@ export default function SalonMerci() {
               e.currentTarget.style.background = "transparent";
             }}
           >
-            Book Online
+            Book online
           </a>
         </div>
 
         <div style={{ ...styles.contactInfo, justifyContent: "center", marginTop: "64px" }}>
           {[
-            { label: "Phone", value: "66 13 57 47" },
-            { label: "Website", value: "salonmerci.dk" },
-            { label: "Location", value: "Odense, Denmark" },
-            { label: "Hours", value: "Tue - Sat" },
+            { label: "Telefon", value: "66 13 57 47" },
+            { label: "Hjemmeside", value: "salonmerci.dk" },
+            { label: "Adresse", value: "Odense, Danmark" },
+            { label: "Åbningstider", value: "Tirs - Lør" },
           ].map((c) => (
             <div key={c.label} style={styles.contactItem}>
               <span style={styles.contactLabel}>{c.label}</span>
