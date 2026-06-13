@@ -24,7 +24,6 @@ const OFF_WHITE = "#F0EAD6";
 
 const NAV_LINKS = [
   { id: "services", label: "Ydelser" },
-  { id: "gallery", label: "Galleri" },
   { id: "book", label: "Booking" },
 ];
 
