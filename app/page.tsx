@@ -40,7 +40,7 @@ const SERVICES = [
     price: "Fra 360 kr",
   },
   {
-    title: "Pensionist rabat på klip",
+    title: "Pensionist rabat",
     sub: "Mandag - torsdag før kl 12:00. ",
   },
   {
@@ -66,7 +66,7 @@ const SERVICES = [
   },
   {
     title: "Vi tilbyder meget andet",
-    sub: "Ring og spørg!",
+    sub: "Ring gerne og hør nærmere",
   },
 ];
 
@@ -85,7 +85,12 @@ const BANNER_ITEMS = [
   "Bryllupsstyling",
   "Hårbehandlinger",
 ];
-const BANNER_MARQUEE_ITEMS = [...BANNER_ITEMS, ...BANNER_ITEMS, ...BANNER_ITEMS];
+const BANNER_MARQUEE_SEQUENCE = [
+  ...BANNER_ITEMS,
+  ...BANNER_ITEMS,
+  ...BANNER_ITEMS,
+  ...BANNER_ITEMS,
+];
 
 function GoldDivider({ style }: { style?: React.CSSProperties }) {
   return (
@@ -154,9 +159,10 @@ export default function SalonMerci() {
       alignItems: "center",
       justifyContent: "space-between",
       background: scrollY > 60 ? "rgba(10,10,10,0.95)" : "transparent",
-      borderBottom: scrollY > 60 ? `0.5px solid ${GOLD}33` : "none",
-      transition: "background 0.4s ease, border 0.4s ease",
+      boxShadow: scrollY > 60 ? `inset 0 -1px 0 ${GOLD}33` : "none",
+      transition: "background 0.4s ease, box-shadow 0.4s ease",
       backdropFilter: scrollY > 60 ? "blur(12px)" : "none",
+      WebkitBackdropFilter: scrollY > 60 ? "blur(12px)" : "none",
     },
     navLogo: {
       fontFamily: "'Cinzel', serif",
@@ -287,7 +293,7 @@ export default function SalonMerci() {
     },
     introBand: {
       background: GOLD,
-      padding: "22px 48px",
+      padding: "22px 0 22px 0",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -342,6 +348,9 @@ export default function SalonMerci() {
       transition: "background 0.3s",
       position: "relative",
       overflow: "hidden",
+      display: "flex",
+      flexDirection: "column",
+      minHeight: "220px",
     }),
     serviceCardAccent: {
       position: "absolute",
@@ -363,7 +372,7 @@ export default function SalonMerci() {
       fontSize: "16px",
       letterSpacing: "2px",
       color: OFF_WHITE,
-      marginBottom: "10px",
+      margin: "0 0 10px",
     },
     serviceSub: {
       fontSize: "13px",
@@ -371,7 +380,7 @@ export default function SalonMerci() {
       whiteSpace: "pre-line",
       color: `${OFF_WHITE}70`,
       letterSpacing: "0.5px",
-      marginBottom: "20px",
+      margin: "0",
     },
     servicePrice: {
       fontFamily: "'Cormorant Garamond', serif",
@@ -379,6 +388,8 @@ export default function SalonMerci() {
       fontStyle: "italic",
       color: GOLD,
       letterSpacing: "1px",
+      marginTop: "auto",
+      display: "inline-block",
     },
     galleryGrid: {
       display: "grid",
@@ -564,7 +575,7 @@ export default function SalonMerci() {
           0%, 100% { opacity: 1; transform: scaleY(1); }
           50% { opacity: 0.4; transform: scaleY(0.6); }
         }
-        @keyframes marquee {
+        @keyframes marqueeTrack {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
@@ -574,6 +585,30 @@ export default function SalonMerci() {
         a { text-decoration: none; }
         button:hover { opacity: 0.88; }
         .service-accent { transition: height 0.4s ease; }
+        .intro-marquee {
+          position: relative;
+          width: 100%;
+          overflow: hidden;
+        }
+        .intro-marquee-track {
+          display: flex;
+          width: max-content;
+          white-space: nowrap;
+          will-change: transform;
+          animation: marqueeTrack 28s linear infinite;
+        }
+        .intro-marquee-group {
+          display: flex;
+          gap: 40px;
+          align-items: center;
+          padding-right: 40px;
+          flex-shrink: 0;
+        }
+        .intro-marquee-item {
+          display: flex;
+          gap: 40px;
+          align-items: center;
+        }
 
         @media (max-width: 980px) {
           nav { padding: 16px 20px; }
@@ -588,8 +623,9 @@ export default function SalonMerci() {
           .main-section { padding: 72px 20px !important; }
           .gallery-grid { grid-template-columns: 1fr !important; grid-template-rows: repeat(6, 180px) !important; }
           .footer-wrap { flex-direction: column; gap: 16px; }
-          .intro-track { animation-duration: 34s !important; }
-          .intro-group { gap: 28px !important; padding-right: 28px !important; }
+          .intro-marquee-track { animation-duration: 34s !important; }
+          .intro-marquee-group { gap: 28px !important; padding-right: 28px !important; }
+          .intro-marquee-item { gap: 28px !important; }
           button, a[style] { font-size: 13px !important; }
         }
       `}</style>
@@ -695,56 +731,43 @@ export default function SalonMerci() {
       </section>
 
       <div style={styles.introBand}>
-        <div
-          className="intro-track"
-          style={{
-            display: "flex",
-            animation: "marquee 24s linear infinite",
-            width: "max-content",
-            willChange: "transform",
-            whiteSpace: "nowrap",
-          }}
-        >
-          {[0, 1].map((groupIndex) => (
-            <span
-              key={groupIndex}
-              className="intro-group"
-              aria-hidden={groupIndex === 1}
-              style={{
-                display: "flex",
-                gap: "40px",
-                flexShrink: 0,
-                paddingRight: "40px",
-              }}
-            >
-              {BANNER_MARQUEE_ITEMS.map((item, itemIndex) => (
-                <span
-                  key={`${groupIndex}-${item}-${itemIndex}`}
-                  style={{ display: "flex", gap: "40px", alignItems: "center" }}
-                >
-                  <span style={styles.introBandText}>{item}</span>
-                  {itemIndex < BANNER_MARQUEE_ITEMS.length - 1 && (
-                    <span
-                      style={{
-                        color: "#2B2100",
-                        fontSize: "14px",
-                        fontWeight: 700,
-                      }}
-                    >
-                      ✦
-                    </span>
-                  )}
-                </span>
-              ))}
-            </span>
-          ))}
+        <div className="intro-marquee" aria-label="Salon ydelser banner">
+          <div className="intro-marquee-track">
+            {[0, 1].map((groupIndex) => (
+              <div
+                key={groupIndex}
+                className="intro-marquee-group"
+                aria-hidden={groupIndex === 1}
+              >
+                {BANNER_MARQUEE_SEQUENCE.map((item, itemIndex) => (
+                  <span
+                    key={`${groupIndex}-${item}-${itemIndex}`}
+                    className="intro-marquee-item"
+                  >
+                    <span style={styles.introBandText}>{item}</span>
+                    {itemIndex < BANNER_MARQUEE_SEQUENCE.length - 1 && (
+                      <span
+                        style={{
+                          color: "#2B2100",
+                          fontSize: "14px",
+                          fontWeight: 700,
+                        }}
+                      >
+                        ✦
+                      </span>
+                    )}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
       <section id="services" style={{ background: BLACK }}>
         <div style={styles.section} className="main-section">
           <p style={styles.sectionEyebrow}>Det tilbyder vi</p>
-          <h2 style={styles.sectionTitle}>Klip klip ?</h2>
+          <h2 style={styles.sectionTitle}>Priser</h2>
 
           <div style={styles.serviceGrid}>
             {SERVICES.map((s, i) => (
@@ -762,8 +785,10 @@ export default function SalonMerci() {
                 />
 
                 <h3 style={styles.serviceTitle}>{s.title}</h3>
-                <p style={styles.serviceSub}>{s.sub}</p>
-                <span style={styles.servicePrice}>{s.price}</span>
+                {s.sub ? <p style={styles.serviceSub}>{s.sub}</p> : null}
+                {s.price ? (
+                  <span style={styles.servicePrice}>{s.price}</span>
+                ) : null}
               </div>
             ))}
           </div>
